@@ -1,16 +1,18 @@
 package com.ionn.softwareengineering.lab1;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        compulsory();
-        //int n = Integer.parseInt(args[0]);
-        //homeWork(n);
-        //bonus();
+        Main main = new Main();
+        main.compulsory();
+        main.homeWork();
+        //main.bonus();
 
     }
 
-    private static void compulsory(){
+    private void compulsory(){
         String[] languages = {"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"};
         int n = (int) (Math.random() * 1000000);
         int binaryAsDecimal = Integer.parseInt("10101", 2);
@@ -25,24 +27,23 @@ public class Main {
         System.out.println("Willy-nilly, this semester I will learn " + languages[n]);
     }
 
-    private static void homeWork(int n){
+    private void homeWork() {
+        Scanner in = new Scanner(System.in);
+
+        int n = in.nextInt();
+
         int[][] latinSquare = new int[n][n];
         int k = n + 1;
         for (int i = 1; i <= n; i++)
         {
-            // This loops runs only after
-            // first iteration of outer
-            // loop. It prints
-            // numbers from n to k
             int temp = k;
 
             while (temp <= n)
             {
-                System.out.print(temp + "b");
+                System.out.print(temp + " ");
                 temp++;
             }
-            // This loop prints numbers from
-            // 1 to k-1.
+
             for (int j = 1; j < k; j++)
                 System.out.print(j + " ");
 
@@ -50,10 +51,10 @@ public class Main {
             System.out.println();
         }
     }
-    private static void bonus(){
+    private void bonus(){
 
     }
-    public static int digitSum(int number){
+    public int digitSum(int number){
         int answer = 0;
         while (number != 0) {
             int digit = number % 10;

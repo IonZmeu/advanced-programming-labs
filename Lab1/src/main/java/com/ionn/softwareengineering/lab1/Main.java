@@ -28,11 +28,14 @@ public class Main {
     }
 
     private void homeWork() {
+        long startTime = System.nanoTime();
+        System.out.println("Write the number for latin square");
         Scanner in = new Scanner(System.in);
-
+        boolean bigNumber = false;
         int n = in.nextInt();
-
-        int[][] latinSquare = new int[n][n];
+        if (n > 30000){
+            bigNumber = true;
+        }
         int k = n + 1;
         for (int i = 1; i <= n; i++)
         {
@@ -40,17 +43,29 @@ public class Main {
 
             while (temp <= n)
             {
-                System.out.print(temp + " ");
+                if(!bigNumber){
+                    System.out.print(temp + " ");
+                }
                 temp++;
             }
 
             for (int j = 1; j < k; j++)
-                System.out.print(j + " ");
+                if(!bigNumber){
+                    System.out.print(j + " ");
+                }
 
             k--;
-            System.out.println();
+            if(!bigNumber){
+                System.out.println();
+            }
+        }
+        long endTime = System.nanoTime();
+        if(bigNumber){
+        System.out.println((endTime-startTime)/1000000 + " milliseconds");
         }
     }
+
+
     private void bonus(){
 
     }

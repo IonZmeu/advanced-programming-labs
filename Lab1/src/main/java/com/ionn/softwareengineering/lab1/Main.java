@@ -71,6 +71,8 @@ public class Main {
     private void bonus(){
 
     }
+
+    //functions used for compulsory
     public int digitSum(int number){
         int answer = 0;
         while (number != 0) {

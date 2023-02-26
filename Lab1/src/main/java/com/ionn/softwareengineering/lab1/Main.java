@@ -1,5 +1,7 @@
 package com.ionn.softwareengineering.lab1;
-
+/*
+* Lab 1 . Zmeu Ion 2E4
+* */
 import java.util.Scanner;
 
 public class Main {

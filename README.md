@@ -1,3 +1,4 @@
 # advanced-programming-labs
 Zmeu Ion 2E4
-lab nr 1 , compulsory and homework 
+lab 1 , compulsory and homework 
+lab 2 , compulsory  

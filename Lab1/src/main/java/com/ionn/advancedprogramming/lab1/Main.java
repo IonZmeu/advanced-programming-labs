@@ -1,4 +1,4 @@
-package com.ionn.softwareengineering.lab1;
+package com.ionn.advancedprogramming.lab1;
 /*
 * Lab 1 . Zmeu Ion 2E4
 * */

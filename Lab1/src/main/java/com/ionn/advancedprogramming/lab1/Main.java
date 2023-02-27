@@ -67,12 +67,12 @@ public class Main {
         }
     }
 
-
+    //tried but failed
     private void bonus(){
 
     }
 
-    //functions used for compulsory
+    //function used for compulsory
     public int digitSum(int number){
         int answer = 0;
         while (number != 0) {

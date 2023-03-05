@@ -14,14 +14,14 @@ public class Main {
         //Road road6 = new Road("road6",50.0,70);
 
         Location location1 = new Location("Iasi1",200,300);
-        location1.addRoad(road1);
-        location1.addRoad(road3);
+        location1.addOutRoad(road1);
+        location1.addOutRoad(road3);
         Location location2 = new Location("Iasi2",200,450);
-        location2.addRoad(road1);
-        location2.addRoad(road2);
+        location2.addInRoad(road1);
+        location2.addOutRoad(road2);
         Location location3 = new Location("Iasi3",200,300);
-        location3.addRoad(road2);
-        location3.addRoad(road3);
+        location3.addInRoad(road2);
+        location3.addInRoad(road3);
 
 
 

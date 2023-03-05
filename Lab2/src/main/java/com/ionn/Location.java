@@ -6,7 +6,8 @@ public class Location {
     private Cities city;
     private Airports airport;
     private GasStations gasStation;
-    private final List<Road> roads = new ArrayList<>();
+    private final List<Road> inRoads = new ArrayList<>();
+    private final List<Road> outRoads = new ArrayList<>();
     private String name;
     private double x;
     private double y;
@@ -18,18 +19,31 @@ public class Location {
         this.y = y;
     }
 
-    public void addRoad(Road road) {
-        for (Road l : this.roads){
+    public void addInRoad(Road road) {
+        for (Road l : this.inRoads){
             if (l.equals(road)){
                 System.out.println("This location already exists");
                 return ;
             }
         }
-        this.roads.add(road);
+        this.inRoads.add(road);
     }
 
-    public List<Road> getRoads() {
-        return roads;
+    public void addOutRoad(Road road) {
+        for (Road l : this.outRoads){
+            if (l.equals(road)){
+                System.out.println("This location already exists");
+                return ;
+            }
+        }
+        this.outRoads.add(road);
+    }
+
+    public List<Road> getInRoads() {
+        return inRoads;
+    }
+    public List<Road> getOutRoads() {
+        return outRoads;
     }
 
     @Override

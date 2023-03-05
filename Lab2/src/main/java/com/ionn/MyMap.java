@@ -3,30 +3,44 @@ package com.ionn;
  * This class represents a map that contains a list of Locations
  */
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class MyMap {
     private final List<Location> locations = new ArrayList<>();
 
-/*
+    /*
      public boolean toOther(Location loc1,Location loc2){
-        HashSet<Road> visited = new HashSet<Road>();
-        List<Road> list = new ArrayList<>();
-        for (Road road : loc1.getOutRoads()){
-            visited.add(road);
-            for (Location l : locations){
-                List<Road> v = l.getInRoads();
-                for (Road vs : v){
-                    if
+        HashSet<Road> visitedRoad = new HashSet<Road>();
+        HashSet<Location> visitedLocation = new HashSet<Location>();
+        visitedLocation.add(loc1);
+        for (Road roadsFromLoc1 : loc1.getOutRoads()) {
+            Collections.addAll(visitedRoad, roadsFromLoc1);
+        }
+        HashSet<Road> visitedRoadStergere = visitedRoad;
+        for (Road it : visitedRoad){
+            for (Location location : locations){
+                for (Road out : location.getInRoads()){
+                    System.out.println(it.toString() + " si " + out.toString());
+                    if(it.equals(out)){
+                        System.out.println("ceva");
+                        visitedLocation.add(location);
+                        for (Road fromOut : location.getOutRoads()){
+                            visitedRoad.add(fromOut);
+                            visitedRoadStergere.add(fromOut);
+                            System.out.println(visitedRoad.toString());
+                        }
+                    }
                 }
             }
-
+            visitedRoadStergere.remove(it);
         }
-        return true;
+        if(visitedLocation.contains(loc2)){
+            return true;
+        }
+         System.out.println(visitedLocation.toString());
+        return false;
     }
-*/
+    */
 
     /**
      * adds this location to MyMap's list of locations

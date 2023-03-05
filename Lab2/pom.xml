@@ -3,14 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ionn</groupId>
+        <artifactId>advanced-programming-labs</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>com.ionn</groupId>
-    <artifactId>advanced-programming-labs</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>Lab1</module>
-        <module>Lab2</module>
-    </modules>
+    <artifactId>Lab2</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -18,5 +17,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <packaging>pom</packaging>
 </project>

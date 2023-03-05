@@ -1,14 +1,29 @@
 package com.ionn;
 
+import java.util.ArrayList;
+import java.util.List;
 public class Location {
     private Cities city;
     private Airports airport;
     private GasStations gasStation;
-    private Road road;
+    private final List<Road> roads = new ArrayList<>();
     private String name;
-    private float x;
-    private float y;
+    private double x;
+    private double y;
 
+        public void addRoad(Road road) {
+        for (Road l : this.roads){
+            if (l.equals(road)){
+                System.out.println("This location already exists");
+                return ;
+            }
+        }
+        this.roads.add(road);
+    }
+
+    public List<Road> getRoads() {
+        return roads;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -58,36 +73,21 @@ public class Location {
         this.name = name;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
-
-    public Road getRoad() {
-        return road;
-    }
-
-    public void setRoad(Road road) {
-        this.road = road;
-    }
-
-//    enum type{
-//        CITIES,
-//        AIRPORTS,
-//        GAS_STATIONS
-//    }
-
 
 }
 

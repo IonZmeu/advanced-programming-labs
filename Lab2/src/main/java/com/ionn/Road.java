@@ -1,13 +1,23 @@
 package com.ionn;
 public class Road {
-    private float length;
+
+    private String name;
+    private double length;
     private int speedLimit;
 
-    public float getLength() {
+    public boolean different(Object obj){
+        Road road = (Road) obj;
+        if (this.name.equals(road.name)){
+            return false;
+        }
+        return true;
+    }
+
+    public double getLength() {
         return length;
     }
 
-    public void setLength(float length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -26,6 +36,13 @@ public class Road {
                 "length=" + length +
                 ", speedLimit=" + speedLimit +
                 '}';
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     enum type{

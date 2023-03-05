@@ -7,6 +7,17 @@ import java.util.List;
 public class MyMap {
     private final List<Location> locations = new ArrayList<>();
 
+
+    public boolean toOther(Location loc1,Location loc2){
+        List<Road> list = new ArrayList<>();
+        for (Road r : loc1.getRoads()){
+            list.add(r);
+        }
+
+
+        return true;
+    }
+
     public void addLocation(Location location) {
         for (Location l : this.locations){
             if (l.equals(location)){

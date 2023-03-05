@@ -5,6 +5,12 @@ public class Road {
     private double length;
     private int speedLimit;
 
+    public Road(String name, double length, int speedLimit) {
+        this.name = name;
+        this.length = length;
+        this.speedLimit = speedLimit;
+    }
+
     public boolean different(Object obj){
         Road road = (Road) obj;
         if (this.name.equals(road.name)){

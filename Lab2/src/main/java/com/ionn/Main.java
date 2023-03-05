@@ -5,38 +5,35 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Location location1 = new Location();
 
-        Road road1 = new Road();
-        road1.setLength(100.0);
-        road1.setSpeedLimit(50);
-        road1.setName("road1");
-        //System.out.println(road1);
+        Road road1 = new Road("road1",100.0,50);
+        Road road2 = new Road("road2",150.0,70);
+        Road road3 = new Road("road3",200.0,30);
+        //Road road4 = new Road("road4",350.0,80);
+        //Road road5 = new Road("road5",70.0,50);
+        //Road road6 = new Road("road6",50.0,70);
 
-        Road road2 = new Road();
-        road1.setLength(150.0);
-        road1.setSpeedLimit(50);
-        road1.setName("road2");
-        //System.out.println(road2);
-
-
-        location1.setName("Iasi1");
-        location1.setX(200);
-        location1.setY(300);
+        Location location1 = new Location("Iasi1",200,300);
         location1.addRoad(road1);
-        //System.out.println(location1);
-
-        Location location2 = new Location();
-        location2.setName("Iasi2");
-        location2.setX(200);
-        location2.setY(450);
+        location1.addRoad(road3);
+        Location location2 = new Location("Iasi2",200,450);
         location2.addRoad(road1);
+        location2.addRoad(road2);
+        Location location3 = new Location("Iasi3",200,300);
+        location3.addRoad(road2);
+        location3.addRoad(road3);
+
+
 
         MyMap myMap = new MyMap();
         myMap.addLocation(location1);
         myMap.addLocation(location2);
+        myMap.addLocation(location3);
+
+
         System.out.println("Is valid : " + myMap.isValid());
         System.out.println();
 
     }
 }
+

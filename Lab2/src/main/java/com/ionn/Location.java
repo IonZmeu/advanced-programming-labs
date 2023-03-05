@@ -11,7 +11,14 @@ public class Location {
     private double x;
     private double y;
 
-        public void addRoad(Road road) {
+
+    public Location(String name, double x, double y) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+    }
+
+    public void addRoad(Road road) {
         for (Road l : this.roads){
             if (l.equals(road)){
                 System.out.println("This location already exists");

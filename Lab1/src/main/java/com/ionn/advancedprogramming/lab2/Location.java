@@ -1,9 +1,55 @@
 package com.ionn.advancedprogramming.lab2;
 
+
+
+
 public class Location {
+    Cities city;
+    Airports airport;
+    GasStations gasStation;
     private String name;
     private float x;
     private float y;
+
+    @Override
+    public boolean equals(Object obj) {
+        Location loc = (Location) obj;
+        if (this.x == loc.x && this.y == loc.y && this.name == loc.name){return true;}else{return false;}
+    }
+
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public Cities getCity() {
+        return city;
+    }
+
+    public void setCity(Cities city) {
+        this.city = city;
+    }
+
+    public Airports getAirport() {
+        return airport;
+    }
+
+    public void setAirport(Airports airport) {
+        this.airport = airport;
+    }
+
+    public GasStations getGasStation() {
+        return gasStation;
+    }
+
+    public void setGasStation(GasStations gasStation) {
+        this.gasStation = gasStation;
+    }
 
     public String getName() {
         return name;
@@ -29,20 +75,11 @@ public class Location {
         this.y = y;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
-    }
-
-    enum type{
-        CITIES,
-        AIRPORTS,
-        GAS_STATIONS
-    }
+//    enum type{
+//        CITIES,
+//        AIRPORTS,
+//        GAS_STATIONS
+//    }
 
 
 }

@@ -8,39 +8,40 @@ import java.util.*;
 public class MyMap {
     private final List<Location> locations = new ArrayList<>();
 
-    /*
-     public boolean toOther(Location loc1,Location loc2){
+    public boolean toOther(Location loc1,Location loc2){
         HashSet<Road> visitedRoad = new HashSet<Road>();
-        HashSet<Location> visitedLocation = new HashSet<Location>();
-        visitedLocation.add(loc1);
         for (Road roadsFromLoc1 : loc1.getOutRoads()) {
             Collections.addAll(visitedRoad, roadsFromLoc1);
         }
-        HashSet<Road> visitedRoadStergere = visitedRoad;
-        for (Road it : visitedRoad){
-            for (Location location : locations){
-                for (Road out : location.getInRoads()){
-                    System.out.println(it.toString() + " si " + out.toString());
-                    if(it.equals(out)){
-                        System.out.println("ceva");
-                        visitedLocation.add(location);
-                        for (Road fromOut : location.getOutRoads()){
-                            visitedRoad.add(fromOut);
-                            visitedRoadStergere.add(fromOut);
-                            System.out.println(visitedRoad.toString());
-                        }
-                    }
+        int numElem = 0;
+        List<Road> temporary = new ArrayList<Road>();
+        while (numElem != visitedRoad.size()){
+          for (Road road : visitedRoad){
+              for (Location loc : locations){
+                  for (Road road2 : loc.getInRoads()){
+                      if(road.equals(road2)){
+                          for (Road road3 : loc.getOutRoads()){
+                              //temporary.add(road3);
+                              visitedRoad.add(road3);
+                          }
+                      }
+                  }
+              }
+          }
+            /*for (Road road4 : temporary) {
+                Collections.addAll(visitedRoad, road4);
+            }*/
+        }
+        for(Road road1 : visitedRoad){
+            for(Road road2 : loc1.getInRoads()){
+                if (road1.equals(road2)){
+                    return true;
                 }
             }
-            visitedRoadStergere.remove(it);
         }
-        if(visitedLocation.contains(loc2)){
-            return true;
-        }
-         System.out.println(visitedLocation.toString());
         return false;
     }
-    */
+
 
     /**
      * adds this location to MyMap's list of locations

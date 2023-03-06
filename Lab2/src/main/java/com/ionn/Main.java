@@ -16,7 +16,7 @@ public class Main {
         Location location1 = new Location("Iasi1",200,300);
         location1.addOutRoad(road1);
         location1.addOutRoad(road3);
-        Location location2 = new Location("Iasi2",200,450);
+        Location location2 = new Location("Iasi2",200,350);
         location2.addInRoad(road1);
         location2.addOutRoad(road2);
         Location location3 = new Location("Iasi3",210,323);

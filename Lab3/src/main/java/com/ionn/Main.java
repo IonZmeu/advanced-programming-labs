@@ -11,15 +11,15 @@ public class Main {
         person2.setName("Ana");
         Person person3 = new Person();
         person3.setName("Bella");
-        Company company = new Company();
-        company.setName("Microsoft");
-        List<Person> personl = new ArrayList<>();
-        personl.add(person1);
-        personl.add(person2);
-        personl.add(person3);
-        Collections.sort(personl);
-        for (Person n : personl) {
-            System.out.println(n.getName());
-        }
+        Company company1 = new Company();
+        company1.setName("Microsoft");
+        Company company2 = new Company();
+        company2.setName("Apple");
+
+        person1.addRelationship(company1,"boss");
+
+        Network network = new Network();
+        network.addNode(person1);
+
     }
 }

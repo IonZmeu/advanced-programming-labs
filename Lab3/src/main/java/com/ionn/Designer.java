@@ -1,8 +1,5 @@
 package com.ionn;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Designer extends Person {
     private int yearsOfExperience;
 

@@ -24,6 +24,7 @@ public class Main {
         Programmer person4 = new Programmer();
         Programmer person5 = new Programmer();
         Programmer person6 = new Programmer();
+        /*
         person4.setName("John");
         person4.setBirthDate("10 july");
         person4.setBackEnd(true);
@@ -33,12 +34,12 @@ public class Main {
         person6.setName("John");
         person6.setBirthDate("10 july");
         person6.setBackEnd(true);
+        */
 
 
-
-        person1.addRelationship(company1,"boss");
-        person2.addRelationship(company1,"boss");
-        person3.addRelationship(company2,"boss");
+        person1.addRelationship(company1,"employer");
+        person2.addRelationship(company1,"employer");
+        person3.addRelationship(company2,"employer");
         person1.addRelationship(company2,"another company");
         person2.addRelationship(company2,"another company");
         person3.addRelationship(company1,"another company");
@@ -46,16 +47,18 @@ public class Main {
         person2.addRelationship(person1,"coworker");
         person1.addRelationship(person3,"friend");
         person2.addRelationship(person3,"friend");
-        person3.addRelationship(person1,"friend");
         person3.addRelationship(person2,"friend");
+        person3.addRelationship(person1,"enemy");
+        company2.addRelationship(person2,"employee");
         company1.addRelationship(person1,"employee");
         company1.addRelationship(person2,"employee");
         company1.addRelationship(person3,"concurrent company employee");
         company2.addRelationship(person1,"concurrent company employee");
         company2.addRelationship(person2,"concurrent company employee");
-        company2.addRelationship(person4,"employee");
-        company2.addRelationship(person5,"employee2");
-        company2.addRelationship(person6,"employee3");
+        company2.addRelationship(person3,"employee");
+        //company2.addRelationship(person4,"employee");
+        //company2.addRelationship(person5,"employee2");
+        //company2.addRelationship(person6,"employee3");
 
         List<Company> companyList = new ArrayList<>();
         companyList.add(company1);

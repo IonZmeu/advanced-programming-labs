@@ -8,6 +8,7 @@ public class Person implements Node,Comparable<Person>{
     private String birthDate;
     private Map<Node, String> relationships = new HashMap<>();
 
+
     public int getConnections(){
         return relationships.size();
     }
@@ -45,12 +46,4 @@ public class Person implements Node,Comparable<Person>{
     }
 
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-
-                '}';
-    }
 }

@@ -31,12 +31,5 @@ public class Company implements Node,Comparable<Company> {
     public Map<Node, String> getRelationships() {
         return relationships;
     }
-    @Override
-    public String toString() {
-        return "Company{" +
-                "name='" + name + '\'' +
-
-                '}';
-    }
 
 }

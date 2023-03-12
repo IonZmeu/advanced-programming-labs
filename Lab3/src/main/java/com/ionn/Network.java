@@ -1,10 +1,7 @@
 package com.ionn;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Network {
     private List<Person> personList = new ArrayList<>();

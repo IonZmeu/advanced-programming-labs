@@ -50,7 +50,7 @@ public class Person implements Node,Comparable<Person>{
         return "Person{" +
                 "name='" + name + '\'' +
                 ", birthDate='" + birthDate + '\'' +
-                ", relationships=" + relationships +
+
                 '}';
     }
 }

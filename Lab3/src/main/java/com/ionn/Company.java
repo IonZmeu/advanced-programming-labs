@@ -28,17 +28,15 @@ public class Company implements Node,Comparable<Company> {
         this.name = name;
     }
 
+    public Map<Node, String> getRelationships() {
+        return relationships;
+    }
     @Override
     public String toString() {
         return "Company{" +
                 "name='" + name + '\'' +
-                ", relationships=" + relationships +
+
                 '}';
     }
-    public void print(){
-        System.out.println( "Company{" +
-                "name='" + name + '\'' +
-                ", relationships=" + relationships +
-                '}');
-    }
+
 }

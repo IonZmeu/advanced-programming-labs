@@ -21,6 +21,20 @@ public class Main {
         company1.setName("Microsoft");
         Company company2 = new Company();
         company2.setName("Apple");
+        Programmer person4 = new Programmer();
+        Programmer person5 = new Programmer();
+        Programmer person6 = new Programmer();
+        person4.setName("John");
+        person4.setBirthDate("10 july");
+        person4.setBackEnd(true);
+        person5.setName("John");
+        person5.setBirthDate("10 july");
+        person5.setBackEnd(true);
+        person6.setName("John");
+        person6.setBirthDate("10 july");
+        person6.setBackEnd(true);
+
+
 
         person1.addRelationship(company1,"boss");
         person2.addRelationship(company1,"boss");
@@ -39,10 +53,9 @@ public class Main {
         company1.addRelationship(person3,"concurrent company employee");
         company2.addRelationship(person1,"concurrent company employee");
         company2.addRelationship(person2,"concurrent company employee");
-        company2.addRelationship(person3,"employee");
-        //company1.addRelationship(company2,"enemies");
-        //company1.addRelationship(company1,"enemies");
-
+        company2.addRelationship(person4,"employee");
+        company2.addRelationship(person5,"employee2");
+        company2.addRelationship(person6,"employee3");
 
         List<Company> companyList = new ArrayList<>();
         companyList.add(company1);
@@ -57,10 +70,7 @@ public class Main {
         network.setPersonList(personList);
         network.setCompanyList(companyList);
 
-        //System.out.println(network.toString());
-        //System.out.println(person1.getRelationships());
-        //System.out.println(company1.toString());
-        //person1.eachRelationship();
-        company1.print();
+        network.print();
+
     }
 }

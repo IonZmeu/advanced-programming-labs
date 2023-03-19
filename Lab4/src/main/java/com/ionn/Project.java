@@ -21,6 +21,7 @@ public class Project implements Comparable<Project>  {
         return this.name.compareTo(o.getName());
     }
 
+
     @Override
     public String toString() {
         return "Project{" +

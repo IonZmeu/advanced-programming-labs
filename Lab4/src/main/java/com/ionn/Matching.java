@@ -34,18 +34,18 @@ public class Matching {
 
     public void lowerPreferences(){
         System.out.println("*** Students with lower than average preferences :");
-        long n;
-        long m = 0;
+        long NumarDePreferinte;
+        long NumarDePreferinteTotal = 0;
         for (Project p  :projectList
              ) {
-          n =   studentList.stream()
+            NumarDePreferinte =   studentList.stream()
                     .filter(s -> prefMap.get(s).contains(p))
                     .count();
-          m = m + n;
+            NumarDePreferinteTotal = NumarDePreferinteTotal + NumarDePreferinte;
         }
-        final int k =(int) m/studentList.size();
+        final int NumarMediuDePreferinte =(int) NumarDePreferinteTotal/studentList.size();
         prefMap.entrySet().stream()
-                .filter(s -> s.getValue().size()<k)
+                .filter(s -> s.getValue().size()<NumarMediuDePreferinte)
                 .forEach(s -> System.out.println(s.getKey() + " : " + s.getValue().size()));
 
     }

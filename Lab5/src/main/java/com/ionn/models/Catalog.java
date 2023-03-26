@@ -1,4 +1,4 @@
-package com.ionn;
+package com.ionn.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,12 +15,7 @@ public class Catalog implements Serializable {
                 .filter(d -> d.getId().equals(id)).findFirst().orElse(null);
     }
 
-    public void add(Document doc) {
-        docs.add(doc);
-    }
-
-
-
+    //public void add(Document doc) {docs.add(doc);}
 
     public String getName() {
         return name;

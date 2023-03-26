@@ -1,4 +1,4 @@
-package com.ionn;
+package com.ionn.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

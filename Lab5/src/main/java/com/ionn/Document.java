@@ -12,6 +12,7 @@ public class Document {
 
     private List<Document> docs = new ArrayList<>();
 
+    public Document() {}
     public Document(String name) {
         this.name = name;
     }
@@ -32,5 +33,29 @@ public class Document {
                 ", tags=" + tags +
                 ", docs=" + docs +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, Object> getTags() {
+        return tags;
+    }
+
+    public void setTags(Map<String, Object> tags) {
+        this.tags = tags;
+    }
+
+    public List<Document> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(List<Document> docs) {
+        this.docs = docs;
     }
 }

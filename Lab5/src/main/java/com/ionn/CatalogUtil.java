@@ -27,9 +27,10 @@ public class CatalogUtil {
         return catalog;
     }
 
-    public static void view(Document doc) {
+    public static void view(Document doc,String path) throws IOException {
         Desktop desktop = Desktop.getDesktop();
-        //… browse or open, depending of the location type
+        File file = new File(path);
+        desktop.open(file);
     }
 
 

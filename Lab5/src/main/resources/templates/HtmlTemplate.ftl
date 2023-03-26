@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>${title}
+  <title>${title}</title>
 </head>
 <body>
   <h1>${title}</h1>
@@ -9,7 +10,7 @@
 
   <ul>
     <#list documentList as document>
-      <li>${system_index + 1}. ${system.name} from ${system.developer}</li>
+      <li>${document_index + 1}. ${document} </li>
     </#list>
   </ul>
 

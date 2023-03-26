@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import com.ionn.models.Catalog;
@@ -35,20 +33,18 @@ public class Freemaker {
         Configuration cfg = new Configuration();
 
         // Where do we load the templates from:
-        cfg.setClassForTemplateLoading(Freemaker.class, "report/templates");
+        cfg.setClassForTemplateLoading(Freemaker.class, "/templates");
 
         // Some other recommended settings:
         cfg.setIncompatibleImprovements(new Version(2, 3, 20));
         cfg.setDefaultEncoding("UTF-8");
-        cfg.setLocale(Locale.US);
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
         // 2. Proccess template(s)
         //
         // You will do this for several times in typical applications.
 
-        // 2.1. Prepare the template input:
-
+        // 2.1. Prepare the template input
         Map<String, Object> input = new HashMap<String, Object>();
 
         input.put("title", "Catalog");
@@ -59,9 +55,7 @@ public class Freemaker {
         input.put("documentList", documentList);
 
         // 2.2. Get the template
-
         Template template = cfg.getTemplate("HtmlTemplate.ftl");
-
         // 2.3. Generate the output
 
         // Write output to the console

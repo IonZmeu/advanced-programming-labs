@@ -2,7 +2,6 @@ package com.ionn;
 
 import com.ionn.commands.*;
 import com.ionn.exceptions.InvalidCatalogException;
-import com.ionn.exceptions.InvalidDocumentException;
 import com.ionn.models.Catalog;
 import com.ionn.models.Document;
 import com.ionn.report.Freemaker;
@@ -45,10 +44,10 @@ public class Main {
             LoadCommand loadCommand = new LoadCommand();
             ViewCommand viewCommand = new ViewCommand();
 
-            Catalog catalog = loadCommand.load("D:/lab/catalog.json");
+            loadCommand.load("D:/lab/catalog.json");
             //System.out.println(catalog);
 
-            //viewCommand.view("D:/lab/catalog.json");
+            viewCommand.view("D:/lab/catalog.json");
         }
 
     private void testFreemaker(Catalog catalog) throws Exception {

@@ -59,8 +59,8 @@ public class Freemaker {
         // 2.3. Generate the output
 
         // Write output to the console
-        Writer consoleWriter = new OutputStreamWriter(System.out);
-        template.process(input, consoleWriter);
+        //Writer consoleWriter = new OutputStreamWriter(System.out);
+        //template.process(input, consoleWriter);
 
         // For the sake of example, also write output into a file:
         Writer fileWriter = new FileWriter(new File("output.html"));

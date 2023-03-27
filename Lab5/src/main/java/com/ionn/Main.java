@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main {
 
         public static void main(String args[]) throws Exception {
-            Main app = new Main();
+            Main app = new Main ();
             app.testCreateSave();
             app.testLoadView();
         }

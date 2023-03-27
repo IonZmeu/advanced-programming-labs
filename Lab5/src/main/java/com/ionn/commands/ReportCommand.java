@@ -4,6 +4,7 @@ import com.ionn.exceptions.InvalidCatalogException;
 import com.ionn.exceptions.InvalidDocumentException;
 import com.ionn.models.Catalog;
 import com.ionn.models.Document;
+import com.ionn.report.Freemaker;
 
 public class ReportCommand implements Command{
     @Override

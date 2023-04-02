@@ -1,10 +1,11 @@
-package com.ionn;
+package com.ionn.graph;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph {
+public class Graph implements Serializable {
     List<Line> lines;
     List<Point> points;
 

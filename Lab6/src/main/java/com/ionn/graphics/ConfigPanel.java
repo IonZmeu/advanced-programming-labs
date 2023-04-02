@@ -1,7 +1,6 @@
-package com.ionn;
+package com.ionn.graphics;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 
 public class ConfigPanel extends JPanel {

@@ -1,4 +1,4 @@
-package com.ionn;
+package com.ionn.others;
 
 import java.util.Random;
 class generateRandom {

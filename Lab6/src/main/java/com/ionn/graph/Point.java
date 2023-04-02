@@ -1,8 +1,9 @@
-package com.ionn;
+package com.ionn.graph;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Point {
+public class Point implements Serializable {
     private int x;
     private int y;
     private int player1 = 0;
@@ -37,11 +38,13 @@ public class Point {
         this.y = y;
     }
     public void draw(Graphics g){
-        if(player1 == 1){
+        if(player1 == 1 && selected){
             g.setColor(Color.RED);
+            color=Color.RED;
         }
-        if(player1 == 2){
+        if(player1 == 2 && selected){
             g.setColor(Color.GREEN);
+            color=Color.GREEN;
         }
         g.fillOval(x - 7, y - 5, 10, 10);
         g.setColor(Color.BLACK);

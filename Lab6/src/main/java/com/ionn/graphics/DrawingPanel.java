@@ -1,10 +1,17 @@
-package com.ionn;
+package com.ionn.graphics;
 
+import com.ionn.graph.Graph;
+import com.ionn.graph.Line;
+import com.ionn.graph.Point;
+import com.ionn.saving.Save;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,9 +25,8 @@ public class DrawingPanel extends JPanel {
     private Graph graph = new Graph();
     Random random = new Random();
     private int player = 0;
-    BufferedImage image; //the offscreen image
+    private BufferedImage image;
 
-    //Graphics2D graphics; //the tools needed to draw in the image
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
         //createOffscreenImage();
@@ -99,6 +105,7 @@ public class DrawingPanel extends JPanel {
         g.clearRect(0, 0, W, H);
         graph.draw(g);
         repaint();
+        paintComponent(g);
     }
 
     public void initializeGraph(){
@@ -107,7 +114,9 @@ public class DrawingPanel extends JPanel {
         }
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
+                if (x[i]!=x2[i][j] && y[i]!=y2[i][j]){
                 graph.addLine(new Line(x[i], y[i], x2[i][j], y2[i][j], graph.getPoints()));
+                }
             }
         }
     }
@@ -118,11 +127,27 @@ public class DrawingPanel extends JPanel {
         graphics.drawImage(image, 0, 0, this);
     }
 
-    //private void createOffscreenImage() {
-    //image = new BufferedImage(W, H, BufferedImage.TYPE_INT_ARGB);
-    //graphics = image.createGraphics();
-    //graphics.setRenderingHint(
-    //        RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    //}
+
+    public void createOffscreenImage() {
+        image = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = image.createGraphics();
+        frame.canvas.paint(g);  //this == JComponent
+        g.dispose();
+        try{ImageIO.write(image,"png",new File("C:\\Users\\Ion\\Desktop\\New folder\\test.png"));}catch (Exception e) {}
+        System.out.println("Saved");
+    }
+
+    public void saveGame() throws IOException {
+        Save save = new Save();
+        File file = new File("C:\\Users\\Ion\\Desktop\\New folder\\save");
+        save.saveGameDataToFile(file);
+        save.saveObject(graph);
+    }
+
+    public void loadGame(File file) throws IOException, ClassNotFoundException {
+        FileInputStream fileStream = new FileInputStream(file);
+        ObjectInputStream objectStream = new ObjectInputStream(fileStream);
+        graph=(Graph) objectStream.readObject();
+    }
 }
 

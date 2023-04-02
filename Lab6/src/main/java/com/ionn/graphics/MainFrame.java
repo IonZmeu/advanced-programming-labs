@@ -1,4 +1,8 @@
-package com.ionn;
+package com.ionn.graphics;
+
+import com.ionn.graphics.ConfigPanel;
+import com.ionn.graphics.ControlPanel;
+import com.ionn.graphics.DrawingPanel;
 
 import javax.swing.*;
 

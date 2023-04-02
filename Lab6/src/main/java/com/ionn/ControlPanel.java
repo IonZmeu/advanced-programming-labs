@@ -17,7 +17,7 @@ public class ControlPanel extends JPanel {
     }
     private void init() {
         //change the default layout manager (just for fun)
-        setLayout(new GridLayout(1, 4));
+        //setLayout(new GridLayout(1, 4));
         //add all buttons ...TODO
         add(loadButton);
         add(saveButton);

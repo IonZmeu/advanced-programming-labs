@@ -19,6 +19,7 @@ public class DrawingPanel extends JPanel {
     }
     @Override
     protected void paintComponent(Graphics g) {
+
 //get the number of dots (numVertices)
 //get the probability that two dots form a line (edgeProbability)
 //draw the board, that is:

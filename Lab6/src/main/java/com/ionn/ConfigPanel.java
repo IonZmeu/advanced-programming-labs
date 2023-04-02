@@ -1,18 +1,16 @@
 package com.ionn;
 
-import jdk.internal.icu.util.CodePointMap;
-
 import javax.swing.*;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+
 
 public class ConfigPanel extends JPanel {
     public MainFrame frame;
+//    public ComboBoxModel<Object> linesCombo;
+//    public CodePointMap.Range dotsField ;
     JLabel dotsLabel, linesLabel;
     JSpinner dotsSpinner;
-    JComboBox linesSpinner;
-    JButton createButton;
-    JButton newGame;
-    JButton LineProb = new JButton("Line probability");
+    JButton newGameButton;
     public ConfigPanel(MainFrame frame) {
         this.frame = frame;
         init();
@@ -24,21 +22,21 @@ public class ConfigPanel extends JPanel {
         dotsLabel = new JLabel("Number of dots:");
         dotsSpinner = new JSpinner(new SpinnerNumberModel(6, 3, 100, 1));
         linesLabel = new JLabel("Line probability");
-        DefaultComboBoxModel<Double> model = new DefaultComboBoxModel<Double>();
-        model.addElement(0.25);
-        model.addElement(0.75);
-        model.addElement(0.5);
-        model.addElement(1.0);
-        newGame = new JButton("Create new game");
-        //linesSpinner = new JSpinner(new SpinnerNumberModel(1,1,1,0.1))
-        //create the rest of the components
- //...TODO
-        add(dotsLabel); //JPanel uses FlowLayout by default
+        DefaultComboBoxModel<Double> lines = new DefaultComboBoxModel<Double>();
+        lines.addElement(0.25);
+        lines.addElement(0.5);
+        lines.addElement(0.75);
+        lines.addElement(1.0);
+        newGameButton = new JButton("Create new game");
+        newGameButton.addActionListener(e -> {
+            frame.canvas.createBoard( (int) dotsSpinner.getValue(), (double) lines.getSelectedItem());
+        });
+
+        add(dotsLabel);
         add(dotsSpinner);
         add(linesLabel);
-        add(new JComboBox(model));
-        add(newGame);
- //...TODO
+        add(new JComboBox(lines));
+        add(newGameButton);
     }
 }
 

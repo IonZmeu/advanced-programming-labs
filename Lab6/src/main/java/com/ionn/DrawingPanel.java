@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class DrawingPanel extends JPanel {
@@ -16,8 +15,9 @@ public class DrawingPanel extends JPanel {
     private int[][] x2, y2;
     private int numVertices;
     private double edgeProbability;
+    private Graph graph = new Graph();
     Random random = new Random();
-
+    private int player = 0;
     BufferedImage image; //the offscreen image
 
     //Graphics2D graphics; //the tools needed to draw in the image
@@ -33,7 +33,19 @@ public class DrawingPanel extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                //Point point = e.getPoint();
+                for (Point p:graph.getPoints()
+                     ) {
+                    if (e.getX() > p.getX()-5 && e.getX() < p.getX()+5 && e.getY() > p.getY()-5 && e.getY() < p.getY()+5){
+                        p.setSelected(true);
+                        System.out.println("Am atins un nod");
+                        if(player % 2 == 0){
+                            p.setPlayer1(2);
+                        }else {
+                            p.setPlayer1(1);
+                        }
+                        player++;
+                    }
+                }
 
 
                 repaint();
@@ -45,6 +57,9 @@ public class DrawingPanel extends JPanel {
         //createOffscreenImage();
         createPoligon(numVertices, edgeProbability);
         getLines();
+        graph.setLines(new ArrayList<>());
+        graph.setPoints(new ArrayList<>());
+        initializeGraph();
     }
 
     private void createPoligon(int numVertices, double edgeProbability) {
@@ -79,28 +94,22 @@ public class DrawingPanel extends JPanel {
         }
     }
 
-    private void drawLines(Graphics g) {
-
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                g.drawLine(x[i], y[i], x2[i][j], y2[i][j]);
-            }
-        }
-    }
-
-    private void drawVertices(Graphics g) {
-        Polygon p = new Polygon();
-        for (int i = 0; i < numVertices; i++) {
-            g.fillOval(x[i] - 7, y[i] - 5, 10, 10);
-        }
-    }
-
     @Override
     public void paint(Graphics g) {
         g.clearRect(0, 0, W, H);
-        drawVertices(g);
-        drawLines(g);
+        graph.draw(g);
         repaint();
+    }
+
+    public void initializeGraph(){
+        for (int i = 0; i < numVertices; i++) {
+            graph.addPoint(new Point(x[i],y[i]));
+        }
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                graph.addLine(new Line(x[i], y[i], x2[i][j], y2[i][j], graph.getPoints()));
+            }
+        }
     }
 
     //Draw the offscreen image, using the original graphics

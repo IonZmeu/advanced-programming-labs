@@ -3,8 +3,18 @@ package com.ionn;
 import java.awt.*;
 
 public class Point {
-    int x;
-    int y;
+    private int x;
+    private int y;
+    private int player1 = 0;
+    private boolean selected = false;
+    private Color color;
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public Point(int x, int y) {
         this.x = x;
@@ -27,6 +37,29 @@ public class Point {
         this.y = y;
     }
     public void draw(Graphics g){
+        if(player1 == 1){
+            g.setColor(Color.RED);
+        }
+        if(player1 == 2){
+            g.setColor(Color.GREEN);
+        }
         g.fillOval(x - 7, y - 5, 10, 10);
+        g.setColor(Color.BLACK);
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public void setPlayer1(int player1) {
+        this.player1 = player1;
+    }
+
+    public int getPlayer1() {
+        return player1;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 }

@@ -5,64 +5,33 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Line implements Serializable {
-    private int x1, x2, y1, y2;
+    private int coordX1, coordX2, coordY1, coordY2;
     Point point1 = new Point(0, 0);
     Point point2 = new Point(0, 0);
 
-    public Line(int x1, int y1, int x2, int y2, List<Point> pointList) {
-        System.out.println(this.toString() + x1 +" "+ x2);
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
+    public Line(int coordX1, int coordY1, int coordX2, int coordY2, List<Point> pointList) {
+        System.out.println(this.toString() + coordX1 +" "+ coordX2);
+        this.coordX1 = coordX1;
+        this.coordX2 = coordX2;
+        this.coordY1 = coordY1;
+        this.coordY2 = coordY2;
         boolean first = true;
         for (Point p : pointList
         ) {
             if (!first) {
-                if (p.getX() == x1 || p.getX() == x2 && p.getY() == y1 || p.getY() == y2) {
+                if ((p.getCoordX() == coordX1 || p.getCoordX() == coordX2 && p.getCoordY() == coordY1
+                        || p.getCoordY() == coordY2)&& p.getCoordX()!= point2.getCoordX() && p.getCoordY()!= point2.getCoordY()) {
                     point1 = p;
-                    System.out.println("am gasit nod1"+p.getX()+ " "+ x1);
+                    System.out.println("am gasit nod 1 "+p.getCoordX()+ " "+ coordX1 + " "+ coordX2);
                 }
             } else {
-                if (p.getX() == x1 || p.getX() == x2 && p.getY() == y1 || p.getY() == y2) {
+                if ((p.getCoordX() == coordX1 || p.getCoordX() == coordX2 && p.getCoordY() == coordY1 || p.getCoordY() == coordY2)&& p.getCoordX()!= point1.getCoordX() && p.getCoordY()!= point1.getCoordY()) {
                     point2 = p;
-                    System.out.println("am gasit nod2");
+                    System.out.println("am gasit nod 2 "+p.getCoordX()+ " "+ coordX1 + " "+ coordX2);
                 }
             }
             first = false;
         }
-    }
-
-    public int getX1() {
-        return x1;
-    }
-
-    public void setX1(int x1) {
-        this.x1 = x1;
-    }
-
-    public int getX2() {
-        return x2;
-    }
-
-    public void setX2(int x2) {
-        this.x2 = x2;
-    }
-
-    public int getY1() {
-        return y1;
-    }
-
-    public void setY1(int y1) {
-        this.y1 = y1;
-    }
-
-    public int getY2() {
-        return y2;
-    }
-
-    public void setY2(int y2) {
-        this.y2 = y2;
     }
 
     public void draw(Graphics g) {
@@ -73,7 +42,7 @@ public class Line implements Serializable {
             }
 
         //System.out.println(x1+" "+" "+x2);
-        g.drawLine(x1, y1, x2, y2);
-        g.setColor(Color.BLACK);
+        g.drawLine(coordX1, coordY1, coordX2, coordY2);
+        g.setColor(Color.BLUE);
     }
 }

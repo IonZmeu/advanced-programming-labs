@@ -4,8 +4,8 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class Point implements Serializable {
-    private int x;
-    private int y;
+    private int coordX;
+    private int coordY;
     private int player1 = 0;
     private boolean selected = false;
     private Color color;
@@ -17,37 +17,39 @@ public class Point implements Serializable {
         this.color = color;
     }
 
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Point(int coordX, int coordY) {
+        this.coordX = coordX;
+        this.coordY = coordY;
+        System.out.println("node with coordinates:" + " x:" + coordX + "y:" + coordY);
     }
 
-    public int getX() {
-        return x;
+    public int getCoordX() {
+        return coordX;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCoordX(int coordX) {
+        this.coordX = coordX;
     }
 
-    public int getY() {
-        return y;
+    public int getCoordY() {
+        return coordY;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setCoordY(int coordY) {
+        this.coordY = coordY;
     }
     public void draw(Graphics g){
-        if(player1 == 1 && selected){
+        g.setColor(Color.BLUE);
+        if(player1 == 1 ){
             g.setColor(Color.RED);
             color=Color.RED;
         }
-        if(player1 == 2 && selected){
+        if(player1 == 2 ){
             g.setColor(Color.GREEN);
             color=Color.GREEN;
         }
-        g.fillOval(x - 7, y - 5, 10, 10);
-        g.setColor(Color.BLACK);
+        g.fillOval(coordX - 7, coordY - 5, 10, 10);
+        g.setColor(Color.BLUE);
     }
 
     public void setSelected(boolean selected) {

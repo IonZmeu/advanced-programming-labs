@@ -1,15 +1,18 @@
 package com.ionn.graphics;
 
 import javax.swing.*;
+import java.io.IOException;
 
 
 public class ConfigPanel extends JPanel {
     public MainFrame frame;
 //    public ComboBoxModel<Object> linesCombo;
 //    public CodePointMap.Range dotsField ;
-    JLabel dotsLabel, linesLabel;
+    JLabel dotsLabel;
+    JLabel linesLabel;
     JSpinner dotsSpinner;
     JButton newGameButton;
+    JComboBox linesComboBox;
     public ConfigPanel(MainFrame frame) {
         this.frame = frame;
         init();
@@ -26,15 +29,20 @@ public class ConfigPanel extends JPanel {
         lines.addElement(0.5);
         lines.addElement(0.75);
         lines.addElement(1.0);
+        linesComboBox = new JComboBox(lines);
         newGameButton = new JButton("Create new game");
         newGameButton.addActionListener(e -> {
-            frame.canvas.createBoard( (int) dotsSpinner.getValue(), (double) lines.getSelectedItem());
+            try {
+                frame.canvas.createBoard( (int) dotsSpinner.getValue(), (double) lines.getSelectedItem());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         add(dotsLabel);
         add(dotsSpinner);
         add(linesLabel);
-        add(new JComboBox(lines));
+        add(linesComboBox);
         add(newGameButton);
     }
 }

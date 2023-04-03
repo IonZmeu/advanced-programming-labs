@@ -18,8 +18,8 @@ import java.util.Random;
 public class DrawingPanel extends JPanel {
     final MainFrame frame;
     final static int W = 800, H = 600;
-    private int[] x, y;
-    private int[][] x2, y2;
+    private int[] coordX, coordY;
+    private int[][] coordX2, coordY2;
     private int numVertices;
     private double edgeProbability;
     private Graph graph = new Graph();
@@ -29,7 +29,6 @@ public class DrawingPanel extends JPanel {
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
-        //createOffscreenImage();
         initPanel();
     }
 
@@ -41,9 +40,9 @@ public class DrawingPanel extends JPanel {
             public void mousePressed(MouseEvent e) {
                 for (Point p:graph.getPoints()
                      ) {
-                    if (e.getX() > p.getX()-5 && e.getX() < p.getX()+5 && e.getY() > p.getY()-5 && e.getY() < p.getY()+5){
+                    if ((e.getX() > p.getCoordX()-5 && e.getX() < p.getCoordX()+5 && e.getY() > p.getCoordY()-5 && e.getY() < p.getCoordY()+5) && !p.isSelected()){
                         p.setSelected(true);
-                        System.out.println("Am atins un nod");
+                        System.out.println("Am atins un nod"+p.getCoordX()+" "+p.getCoordY());
                         if(player % 2 == 0){
                             p.setPlayer1(2);
                         }else {
@@ -52,20 +51,18 @@ public class DrawingPanel extends JPanel {
                         player++;
                     }
                 }
-
-
                 repaint();
             }
         });
     }
 
-    final void createBoard(int numVertices, double edgeProbability) {
-        //createOffscreenImage();
+    final void createBoard(int numVertices, double edgeProbability) throws IOException {
         createPoligon(numVertices, edgeProbability);
         getLines();
         graph.setLines(new ArrayList<>());
         graph.setPoints(new ArrayList<>());
         initializeGraph();
+        saveForReset();
     }
 
     private void createPoligon(int numVertices, double edgeProbability) {
@@ -75,13 +72,13 @@ public class DrawingPanel extends JPanel {
         int y0 = H / 2; //middle of the board
         int radius = H / 2 - 10; //board radius
         double alpha = 2 * Math.PI / numVertices; // the angle
-        x = new int[numVertices];
-        y = new int[numVertices];
-        x2 = new int[numVertices][numVertices];
-        y2 = new int[numVertices][numVertices];
+        coordX = new int[numVertices];
+        coordY = new int[numVertices];
+        coordX2 = new int[numVertices][numVertices];
+        coordY2 = new int[numVertices][numVertices];
         for (int i = 0; i < numVertices; i++) {
-            x[i] = x0 + (int) (radius * Math.cos(alpha * i));
-            y[i] = y0 + (int) (radius * Math.sin(alpha * i));
+            coordX[i] = x0 + (int) (radius * Math.cos(alpha * i));
+            coordY[i] = y0 + (int) (radius * Math.sin(alpha * i));
         }
     }
 
@@ -89,11 +86,11 @@ public class DrawingPanel extends JPanel {
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
                 if (random.nextInt(0, 100) <= edgeProbability * 100) {
-                    x2[i][j] = x[j];
-                    y2[i][j] = y[j];
+                    coordX2[i][j] = coordX[j];
+                    coordY2[i][j] = coordY[j];
                 } else {
-                    x2[i][j] = x[i];
-                    y2[i][j] = y[i];
+                    coordX2[i][j] = coordX[i];
+                    coordY2[i][j] = coordY[i];
                 }
 
             }
@@ -110,12 +107,13 @@ public class DrawingPanel extends JPanel {
 
     public void initializeGraph(){
         for (int i = 0; i < numVertices; i++) {
-            graph.addPoint(new Point(x[i],y[i]));
+            graph.addPoint(new Point(coordX[i], coordY[i]));
+            System.out.println("apelat nou nod");
         }
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
-                if (x[i]!=x2[i][j] && y[i]!=y2[i][j]){
-                graph.addLine(new Line(x[i], y[i], x2[i][j], y2[i][j], graph.getPoints()));
+                if (coordX[i]!= coordX2[i][j] && coordY[i]!= coordY2[i][j]){
+                graph.addLine(new Line(coordX[i], coordY[i], coordX2[i][j], coordY2[i][j], graph.getPoints()));
                 }
             }
         }
@@ -133,7 +131,7 @@ public class DrawingPanel extends JPanel {
         Graphics g = image.createGraphics();
         frame.canvas.paint(g);  //this == JComponent
         g.dispose();
-        try{ImageIO.write(image,"png",new File("C:\\Users\\Ion\\Desktop\\New folder\\test.png"));}catch (Exception e) {}
+        try{ImageIO.write(image,"png",new File("C:\\Users\\Ion\\Desktop\\New folder\\test.png"));}catch (Exception e){}
         System.out.println("Saved");
     }
 
@@ -145,6 +143,17 @@ public class DrawingPanel extends JPanel {
     }
 
     public void loadGame(File file) throws IOException, ClassNotFoundException {
+        FileInputStream fileStream = new FileInputStream(file);
+        ObjectInputStream objectStream = new ObjectInputStream(fileStream);
+        graph=(Graph) objectStream.readObject();
+    }
+    public void saveForReset() throws IOException {
+        Save save = new Save();
+        File file = new File("C:\\Users\\Ion\\Desktop\\New folder\\reset");
+        save.saveGameDataToFile(file);
+        save.saveObject(graph);
+    }
+    public void resetGame(File file) throws IOException, ClassNotFoundException {
         FileInputStream fileStream = new FileInputStream(file);
         ObjectInputStream objectStream = new ObjectInputStream(fileStream);
         graph=(Graph) objectStream.readObject();

@@ -18,9 +18,6 @@ public class ControlPanel extends JPanel {
         this.frame = frame; init();
     }
     private void init() {
-        //change the default layout manager (just for fun)
-        //setLayout(new GridLayout(1, 4));
-        //add all buttons ...TODO
         add(loadButton);
         File file = new File("C:\\Users\\Ion\\Desktop\\New folder\\save");
         loadButton.addActionListener(e -> {
@@ -45,7 +42,17 @@ public class ControlPanel extends JPanel {
 
             frame.canvas.createOffscreenImage();
         });
+        File fileReset = new File("C:\\Users\\Ion\\Desktop\\New folder\\reset");
         add(restartButton);
+        restartButton.addActionListener(e -> {
+            try {
+                frame.canvas.resetGame(fileReset);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         add(exitBtn);
         //configure listeners for all buttons
         exitBtn.addActionListener(this::exitGame);

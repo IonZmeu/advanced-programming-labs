@@ -38,7 +38,7 @@ public class Line implements Serializable {
 
             if (point1.getPlayer1() == point2.getPlayer1() && point1.getPlayer1() != 0) {
                 g.setColor(point1.getColor());
-                System.out.println("scimbat culoarea in " + point1.getColor());
+                //System.out.println("scimbat culoarea in " + point1.getColor());
             }
 
         //System.out.println(x1+" "+" "+x2);

@@ -27,7 +27,7 @@ public class ExplorationMap {
         if (!cell.isVisited()) {
             cell.setTokenList(robot.explore.mem.extractTokens(n));
             cell.setVisited(true);
-            System.out.println("success" + " " + k + " " + robot.getName());
+//            System.out.println("success" + " " + k + " " + robot.getName());
             k++;
             return true;
         }

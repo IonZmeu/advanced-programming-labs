@@ -22,7 +22,7 @@ public class CommandManager implements Runnable {
                 System.out.println("stopping all robots");
                 pauseAllRobots();
             } else if (command.contains("pause ")) {
-                pauseRobot(parseRobotName(command,"stop "));
+                pauseRobot(parseRobotName(command,"pause "));
             } else if (command.contains("start ")) {
                 startRobot(parseRobotName(command,"start "));
             } else {
@@ -62,14 +62,14 @@ public class CommandManager implements Runnable {
     private boolean hasNextLine(Scanner sin)  {
         while (true) {
             try {
-                if (!(System.in.available() == 0)) break;
+                if ((System.in.available() != 0)) break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             try {
                 Thread.currentThread().sleep(10);
             } catch (InterruptedException e) {
-                System.out.println("Thread is interrupted.. breaking from loop");
+                Thread.currentThread().interrupt();
                 return false;
             }
         }

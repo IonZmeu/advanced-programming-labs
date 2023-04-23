@@ -1,13 +1,12 @@
 package com.ionn;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Timekeeper implements Runnable {
     private boolean running = true;
     private long startTime;
-    private long timeLimit = 10;
+    private long timeLimit = 200;
 
     private List<Robot> robotList;
 
@@ -32,6 +31,13 @@ public class Timekeeper implements Runnable {
                 System.out.println("exploration finished in " + explorationTime + "s");
                 break;
             }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
         }
     }
 

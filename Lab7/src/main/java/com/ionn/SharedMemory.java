@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Random;
 
 public class SharedMemory {
-    private final List<Token> tokenList = new ArrayList<Token>();
+    private final List<Token> tokenList = new ArrayList<>();
+    int matrixDimension;
+    Random random = new Random();
 
-    public SharedMemory(int n) {
-        for (int i = 1; i <= n * n * n; i++) {
+
+    public SharedMemory(int matrixDimension) {
+        this.matrixDimension = matrixDimension;
+        for (int i = 1; i <= matrixDimension * matrixDimension * matrixDimension; i++) {
             tokenList.add(new Token(i));
         }
         Collections.shuffle(tokenList);
@@ -21,11 +25,11 @@ public class SharedMemory {
             if (tokenList.isEmpty()) {
                 break;
             }
-            Random random = new Random();
-            int randNumber = random.nextInt(0,tokenList.size());
+            int randNumber = random.nextInt(0, tokenList.size());
             extracted.add(tokenList.get(randNumber));
             tokenList.remove(randNumber);
         }
         return extracted;
     }
+
 }

@@ -120,6 +120,7 @@ public class DrawingPanel extends JPanel {
     }
 
     //Draw the offscreen image, using the original graphics
+
     @Override
     protected void paintComponent(Graphics graphics) {
         graphics.drawImage(image, 0, 0, this);

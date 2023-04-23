@@ -1,8 +1,9 @@
 package com.ionn;
 
-import java.util.Random;
 
 public class Robot implements Runnable {
+    private int currentPositionX = 0;
+    private int getCurrentPositionY = 0;
     private String name;
     Exploration explore ;
     private int extractedTokens;
@@ -24,22 +25,19 @@ public class Robot implements Runnable {
                         pauseLock.wait();
                         System.out.println("Starting robot: " + name);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        Thread.currentThread().interrupt();
                     }
                 }
             }
 
             try {
-                Thread.sleep(300);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
             }
 
-            Random random = new Random();
-            int row = random.nextInt(0,explore.getN());
-            int col = random.nextInt(0,explore.getN());
             synchronized (explore){
-                explore.getMap().visit(row, col, this);
+                explore.getMap().visit(this);
             }
         }
         System.out.println("Finished exploring: " + getName() + ", extracted " + extractedTokens + " tokens");
@@ -74,6 +72,22 @@ public class Robot implements Runnable {
 
     public void addExtractedTokens(int extractedTokens) {
         this.extractedTokens = this.extractedTokens + extractedTokens;
+    }
+
+    public int getCurrentPositionX() {
+        return currentPositionX;
+    }
+
+    public void setCurrentPositionX(int currentPositionX) {
+        this.currentPositionX = currentPositionX;
+    }
+
+    public int getGetCurrentPositionY() {
+        return getCurrentPositionY;
+    }
+
+    public void setGetCurrentPositionY(int getCurrentPositionY) {
+        this.getCurrentPositionY = getCurrentPositionY;
     }
 }
 

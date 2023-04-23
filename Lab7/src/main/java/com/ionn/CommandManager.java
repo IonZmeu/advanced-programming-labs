@@ -1,13 +1,11 @@
 package com.ionn;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class CommandManager implements Runnable {
     private List<Robot> robotList ;
-    private Exploration explore = new Exploration();
-    private  List<Robot> suspendedRobotList = new ArrayList<>();
     public CommandManager(List<Robot> robotList) {
         this.robotList = robotList;
     }
@@ -15,7 +13,7 @@ public class CommandManager implements Runnable {
     @Override
     public void run() {
         var scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
+        while (hasNextLine(scanner)) {
             String command = scanner.nextLine();
             if(command.equals("startALL")){
                 System.out.println("starting all robots");
@@ -42,15 +40,11 @@ public class CommandManager implements Runnable {
     }
 
     private void startAllRobots(){
-        synchronized (explore) {
             robotList.forEach(Robot::resume);
-        }
     }
 
     private void pauseAllRobots() {
-        synchronized (explore) {
             robotList.forEach(Robot::pause);
-        }
     }
 
     private void startRobot(String robotName){
@@ -65,7 +59,20 @@ public class CommandManager implements Runnable {
                 .forEach(Robot::pause);
     }
 
-    public void setExplore(Exploration explore) {
-        this.explore = explore;
+    private boolean hasNextLine(Scanner sin)  {
+        while (true) {
+            try {
+                if (!(System.in.available() == 0)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Thread.currentThread().sleep(10);
+            } catch (InterruptedException e) {
+                System.out.println("Thread is interrupted.. breaking from loop");
+                return false;
+            }
+        }
+        return sin.hasNextLine();
     }
 }

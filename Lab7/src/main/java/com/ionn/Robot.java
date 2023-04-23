@@ -3,9 +3,9 @@ package com.ionn;
 import java.util.Random;
 
 public class Robot implements Runnable {
-
     private String name;
     Exploration explore ;
+    private int extractedTokens;
     private volatile boolean running = true;
     private volatile boolean paused = false;
     private final Object pauseLock = new Object();
@@ -42,7 +42,7 @@ public class Robot implements Runnable {
                 explore.getMap().visit(row, col, this);
             }
         }
-        System.out.println("Finished exploring: " + getName());
+        System.out.println("Finished exploring: " + getName() + ", extracted " + extractedTokens + " tokens");
     }
 
     public void setRunning(boolean running) {
@@ -66,6 +66,14 @@ public class Robot implements Runnable {
 
     public boolean isRunning() {
         return running;
+    }
+
+    public int getExtractedTokens() {
+        return extractedTokens;
+    }
+
+    public void addExtractedTokens(int extractedTokens) {
+        this.extractedTokens = this.extractedTokens + extractedTokens;
     }
 }
 

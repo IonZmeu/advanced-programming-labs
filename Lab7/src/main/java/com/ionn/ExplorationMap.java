@@ -27,6 +27,7 @@ public class ExplorationMap {
         Cell cell = matrix[row][col];
         if (!cell.isVisited()) {
             cell.setTokenList(robot.explore.mem.extractTokens(n));
+            robot.addExtractedTokens(n);
             cell.setVisited(true);
 //            System.out.println("success" + " " + k + " " + robot.getName());
             k++;

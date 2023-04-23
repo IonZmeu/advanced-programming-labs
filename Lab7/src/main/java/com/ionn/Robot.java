@@ -6,9 +6,6 @@ public class Robot implements Runnable {
 
     private String name;
     Exploration explore ;
-    public Robot(String name) {
-        this.name = name;
-    }
     private volatile boolean running = true;
     private volatile boolean paused = false;
     private final Object pauseLock = new Object();
@@ -67,5 +64,8 @@ public class Robot implements Runnable {
         }
     }
 
+    public boolean isRunning() {
+        return running;
+    }
 }
 

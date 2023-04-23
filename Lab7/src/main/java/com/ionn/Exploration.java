@@ -1,6 +1,7 @@
 package com.ionn;
 
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,8 @@ public class Exploration {
     public final SharedMemory mem = new SharedMemory(n);
     private final ExplorationMap map = new ExplorationMap(n);
     private final List<Robot> robots = new ArrayList<>();
-    private final Timekeeper timekeeper = new Timekeeper();
-
     private static Exploration explore = new Exploration();
+    private Thread commandManagerThread;
 
 
     public void start() {
@@ -23,8 +23,8 @@ public class Exploration {
             thread.start();
             System.out.println("robot " + robot.getName() + " started");
         }
+        StartCommandsManager();
         StartTimekeeper(threadList);
-        StartCommandsManager(threadList);
 
         threadList.forEach(thread -> {
             try {
@@ -33,12 +33,13 @@ public class Exploration {
                 throw new RuntimeException(e);
             }
         });
+        commandManagerThread.stop();
+        System.out.println("Done executing");
     }
     public static void main(String args[]) {
         explore.robots.add(new Robot("Wall-E",explore));
         explore.robots.add(new Robot("R2D2",explore));
         explore.robots.add(new Robot("Optimus Prime",explore));
-
         explore.start();
     }
 
@@ -50,18 +51,18 @@ public class Exploration {
         return n;
     }
 
+    private void StartCommandsManager(){
+        CommandManager commandManager = new CommandManager(robots);
+        commandManager.setExplore(explore);
+        commandManagerThread = new Thread(commandManager);
+        commandManagerThread.start();
+    }
     private void StartTimekeeper(List<Thread> threadList){
+        Timekeeper timekeeper = new Timekeeper(Instant.now().toEpochMilli(),robots);
         timekeeper.setRobotList(robots);
         Thread thread = new Thread(timekeeper);
         threadList.add(thread);
         thread.start();
     }
 
-    private void StartCommandsManager(List<Thread> threadList){
-        CommandManager commandManager = new CommandManager(robots);
-        commandManager.setExplore(explore);
-        Thread thread = new Thread(commandManager);
-        threadList.add(thread);
-        thread.start();
-    }
 }

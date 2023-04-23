@@ -1,7 +1,8 @@
 package com.ionn;
 
-public class ExplorationMap {
+import java.sql.Time;
 
+public class ExplorationMap {
     private int n;
     private int k = 0;
     private final Cell[][] matrix;

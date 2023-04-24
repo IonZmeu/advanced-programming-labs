@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Exploration {
     private final Object lock = new Object();
-    private int n = 5;
-    public final SharedMemory mem = new SharedMemory(n);
-    private final ExplorationMap map = new ExplorationMap(n);
+    private int matrixdimension = 5;
+    public final SharedMemory mem = new SharedMemory(matrixdimension);
+    private final ExplorationMap map = new ExplorationMap(matrixdimension);
     private final List<Robot> robots = new ArrayList<>();
     private static Exploration explore = new Exploration();
     private Thread commandManagerThread;
@@ -48,7 +48,7 @@ public class Exploration {
     }
 
     public int getN() {
-        return n;
+        return matrixdimension;
     }
 
     private void StartCommandsManager(){

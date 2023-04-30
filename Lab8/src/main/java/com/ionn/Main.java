@@ -1,38 +1,52 @@
 package com.ionn;
 
-import lombok.NoArgsConstructor;
+import com.ionn.dao.*;
+import com.ionn.database.Database;
+import com.ionn.dto.ArtistDTO;
+import com.ionn.dto.GenreDTO;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 public class Main {
     public static void main(String args[]) {
         try {
 
             var artist = new Artist();
-            artist.create("Pink Floyd");
-            artist.create("Michael Jackson");
+            ArtistDTO artistDTO = new ArtistDTO();
+            artistDTO.setName("Pink Floyd");
+            artist.insert(artistDTO);
+            artistDTO.setName("Michael Jackson");
+            artist.insert(artistDTO);
             Database.getConnection().commit();
 
             var genres = new Genre();
-            genres.create("Rock"); //TODO: Funk, Soul, Pop
+            GenreDTO genreDTO = new GenreDTO();
+            genreDTO.setGenre("Rock");
+            genres.insert(genreDTO);
+            genreDTO.setGenre("Funk");
+            genres.insert(genreDTO);
+            genreDTO.setGenre("Soul");
+            genres.insert(genreDTO);
+            genreDTO.setGenre("Pop");
+            genres.insert(genreDTO);
             Database.getConnection().commit();
 
-            var albums = new Album();
-            albums.create(1979, "The Wall", "Pink Floyd", "Rock");
-            albums.create(1982, "Thriller", "Michael Jackson","Funk,Soul,Pop");
-            Database.getConnection().commit();
+
+            //albums.insert(1979, "The Wall", "Pink Floyd", "Rock");
+            //albums.insert(1982, "Thriller", "Michael Jackson","Funk,Soul,Pop");
+            //Database.getConnection().commit();
 
             Import imp = new Import();
             imp.importFromDataSet("C:\\Users\\Ion\\Desktop\\HLAB9\\javaDataSet\\albumlist.csv");
+            Database.getConnection().commit();
 
-            albums.print_all();
+            Album albums = new Album();
+            albums.printAll();
+            System.out.println("final");
             Database.getConnection().close();
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.err.println(e);
-            Database.rollback();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 }

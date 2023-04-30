@@ -1,9 +1,6 @@
 package com.ionn;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database {
     private static final String URL =
@@ -13,19 +10,35 @@ public class Database {
     private static Connection connection = null;
     String sql;
     private Database() throws SQLException {
-        createConnection();
+        System.out.println("ceva");
+        connection = Database.getConnection();
         Statement stmt = connection.createStatement();
-
-        sql = "CREATE DATABASE ALBUMS";
+        System.out.println("ceva1");
+        sql = "CREATE TABLE IF NOT EXISTS public.artists" +
+                "(name character varying(30)," +
+                "id bigint," +
+                "PRIMARY KEY (id))";
         stmt.executeUpdate(sql);
-        System.out.println("Database created successfully...");
 
-        sql = "CREATE DATABASE ALBUMS";
+        sql = "CREATE TABLE IF NOT EXISTS public.genres" +
+                "(name character varying(30)," +
+                "id bigint," +
+                "PRIMARY KEY (id))";
         stmt.executeUpdate(sql);
-        System.out.println("Database created successfully...");
+
+        sql = "CREATE TABLE IF NOT EXISTS public.albums" +
+                "(title varchar(30)," +
+                "artist varchar(30)," +
+                "genre varchar(30)," +
+                "release_year bigint," +
+                "id bigint," +
+                "PRIMARY KEY (id))";
+        stmt.executeUpdate(sql);
+
+        System.out.println("Table created successfully...");
 
         stmt.close();
-        
+
     }
     public static Connection getConnection() {
         if(connection == null){
@@ -36,6 +49,7 @@ public class Database {
     private static void createConnection() {
         try {
             connection = DriverManager.getConnection(URL,USER,PASSWORD);
+            Database database = new Database();
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             System.err.println(e);

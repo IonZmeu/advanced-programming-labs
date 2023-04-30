@@ -3,12 +3,16 @@ package com.ionn;
 import java.sql.*;
 
 public class Artist {
+    private int id = 0;
+    String sql;
     public void create(String name) throws SQLException {
         Connection con = Database.getConnection();
         try (PreparedStatement pstmt = con.prepareStatement(
-                "insert into artists (name) values (?)")) {
-            pstmt.setString(1, name);
+                "insert into artists (id,name) values (?,?) ON CONFLICT (id) DO NOTHING;")) {
+            pstmt.setInt(1, id);
+            pstmt.setString(2, name);
             pstmt.executeUpdate();
+            id++;
         }
     }
 

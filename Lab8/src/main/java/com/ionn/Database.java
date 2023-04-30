@@ -10,32 +10,38 @@ public class Database {
     private static Connection connection = null;
     String sql;
     private Database() throws SQLException {
-        System.out.println("ceva");
         connection = Database.getConnection();
         Statement stmt = connection.createStatement();
-        System.out.println("ceva1");
+
+        sql = "DROP TABLE IF EXISTS public.artists ";
+        stmt.executeUpdate(sql);
+
         sql = "CREATE TABLE IF NOT EXISTS public.artists" +
-                "(name character varying(30)," +
+                "(name character varying(100)," +
                 "id bigint," +
                 "PRIMARY KEY (id))";
+        stmt.executeUpdate(sql);
+
+        sql = "DROP TABLE IF EXISTS public.genres ";
         stmt.executeUpdate(sql);
 
         sql = "CREATE TABLE IF NOT EXISTS public.genres" +
-                "(name character varying(30)," +
+                "(name character varying(100)," +
                 "id bigint," +
                 "PRIMARY KEY (id))";
         stmt.executeUpdate(sql);
 
+        sql = "DROP TABLE IF EXISTS public.albums ";
+        stmt.executeUpdate(sql);
+
         sql = "CREATE TABLE IF NOT EXISTS public.albums" +
-                "(title varchar(30)," +
-                "artist varchar(30)," +
-                "genre varchar(30)," +
+                "(title varchar(100)," +
+                "artist varchar(100)," +
+                "genre varchar(100)," +
                 "release_year bigint," +
                 "id bigint," +
                 "PRIMARY KEY (id))";
         stmt.executeUpdate(sql);
-
-        System.out.println("Table created successfully...");
 
         stmt.close();
 

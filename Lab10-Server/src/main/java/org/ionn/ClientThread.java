@@ -81,19 +81,32 @@ public class ClientThread extends Thread {
                     }
                 }
 
-                if (request.matches("C.*")) {
+                if (request.matches("C:.*")) {
                     String[] xyTogether = request.split(":",2);
                     String[] xy = xyTogether[1].split(",",2);
                     int coordinateX = Integer.parseInt(xy[0]);
                     int coordinateY = Integer.parseInt(xy[1]);
+
                     if (player.getPlayerNumber() == 1){
                         game.getGameBoard().playerOneMove(coordinateX,coordinateY);
                         PrintWriter out2 = new PrintWriter(game.getPlayer2().getSocket().getOutputStream());
                         out2.println("The other player moved x:" + coordinateX + " y:" + coordinateY);
                         out2.flush();
-                        out2 = new PrintWriter(game.getPlayer2().getSocket().getOutputStream());
-                        out2.println("3.Submit coordinates in the form : С:x,y");
+                        out2.println(game.getGameBoard().printBoard());
                         out2.flush();
+                        if (game.getGameBoard().checkWinner(2) == 2){
+                            out2 = new PrintWriter(game.getPlayer1().getSocket().getOutputStream());
+                            out2.println("You lost");
+                            out2.flush();
+
+                            out2 = new PrintWriter(game.getPlayer2().getSocket().getOutputStream());
+                            out2.println("You Won");
+                            out2.flush();
+                        }else {
+                            out2 = new PrintWriter(game.getPlayer2().getSocket().getOutputStream());
+                            out2.println("3.Submit coordinates (from 0 to 14) in the form : С:x,y");
+                            out2.flush();
+                        }
                     }
 
                     if (player.getPlayerNumber() == 2){
@@ -101,9 +114,21 @@ public class ClientThread extends Thread {
                         PrintWriter out2 = new PrintWriter(game.getPlayer1().getSocket().getOutputStream());
                         out2.println("The other player moved x:" + coordinateX + " y:" + coordinateY);
                         out2.flush();
-                        out2 = new PrintWriter(game.getPlayer1().getSocket().getOutputStream());
-                        out2.println("3.Submit coordinates in the form : С:x,y");
+                        out2.println(game.getGameBoard().printBoard());
                         out2.flush();
+
+                        if (game.getGameBoard().checkWinner(1) == 1){
+                            out2 = new PrintWriter(game.getPlayer2().getSocket().getOutputStream());
+                            out2.println("You lost");
+                            out2.flush();
+                            out2 = new PrintWriter(game.getPlayer1().getSocket().getOutputStream());
+                            out2.println("You Won");
+                            out2.flush();
+                        }else{
+                            out2 = new PrintWriter(game.getPlayer1().getSocket().getOutputStream());
+                            out2.println("3.Submit coordinates in the form : С:x,y");
+                            out2.flush();
+                        }
                     }
                 }
 

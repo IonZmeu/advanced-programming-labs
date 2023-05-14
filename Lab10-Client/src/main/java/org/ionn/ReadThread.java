@@ -14,7 +14,8 @@ public class ReadThread extends Thread {
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         while (true){
             try {
-                System.out.println(in.readLine());
+                String fromServer = in.readLine();
+                System.out.println(fromServer);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

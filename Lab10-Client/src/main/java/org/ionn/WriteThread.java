@@ -19,7 +19,17 @@ public class WriteThread extends Thread {
         out.println(PLAYER_ID);
         while (true){
             String request = scanner.nextLine();
-            out.println(request);
+            if (request.equals("1")){//Create game
+                out.println("Create game");
+            }
+            if (request.equals("2")){//Join game
+                out.println("Join game");
+            }
+            if (request.matches("C.*")){
+                out.println(request);
+            }else{
+                out.println(request);
+            }
         }
     }
 }

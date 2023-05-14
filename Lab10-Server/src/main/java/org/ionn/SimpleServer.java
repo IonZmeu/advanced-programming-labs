@@ -1,6 +1,8 @@
 package org.ionn;
 
 import lombok.Data;
+import org.ionn.game.Game;
+import org.ionn.game.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class SimpleServer {
         try {
             serverSocket = new ServerSocket(PORT);
             while (true) {
-                System.out.println("Waiting for connection ...");
+                    System.out.println("Waiting for connection ...");
                 Socket socket = serverSocket.accept();
                 synchronized (lockObject) {
                     String playerId = readPlayerId(socket.getInputStream());

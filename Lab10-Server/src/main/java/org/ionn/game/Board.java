@@ -1,4 +1,4 @@
-package org.ionn;
+package org.ionn.game;
 
 import lombok.Data;
 

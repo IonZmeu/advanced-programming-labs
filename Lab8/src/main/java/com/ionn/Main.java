@@ -31,11 +31,6 @@ public class Main {
             genres.insert(genreDTO);
             Database.getConnection().commit();
 
-
-            //albums.insert(1979, "The Wall", "Pink Floyd", "Rock");
-            //albums.insert(1982, "Thriller", "Michael Jackson","Funk,Soul,Pop");
-            //Database.getConnection().commit();
-
             Import imp = new Import();
             imp.importFromDataSet("C:\\Users\\Ion\\Desktop\\HLAB9\\javaDataSet\\albumlist.csv");
             Database.getConnection().commit();

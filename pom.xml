@@ -16,6 +16,9 @@
         <module>Lab6</module>
         <module>Lab7</module>
         <module>Lab8</module>
+        <module>Lab9</module>
+        <module>Lab10-Server</module>
+        <module>Lab10-Client</module>
     </modules>
 
     <properties>
@@ -23,6 +26,15 @@
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <packaging>pom</packaging>
 </project>

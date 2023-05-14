@@ -1,12 +1,16 @@
 package org.ionn;
 
+import lombok.Data;
+
 import java.io.*;
 import java.util.Scanner;
 
 import static org.ionn.SimpleClient.PLAYER_ID;
 
+@Data
 public class WriteThread extends Thread {
     private final OutputStream outputStream;
+    private boolean running = true;
     public WriteThread(OutputStream outputStream) {
         this.outputStream = outputStream;
 
@@ -17,7 +21,7 @@ public class WriteThread extends Thread {
         PrintWriter out = new PrintWriter(outputStream,true);
         Scanner scanner = new Scanner(System.in);
         out.println(PLAYER_ID);
-        while (true){
+        while (running){
             String request = scanner.nextLine();
             if (request.equals("1")){//Create game
                 out.println("Create game");
@@ -27,7 +31,8 @@ public class WriteThread extends Thread {
             }
             if (request.matches("C.*")){
                 out.println(request);
-            }else{
+            }
+            else{
                 out.println(request);
             }
         }

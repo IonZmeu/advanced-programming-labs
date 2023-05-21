@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.data.Game;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.List;
 @Service
 public class GameService {
     private final List<Game> gameList;
+    ObjectMapper objectMapper = new ObjectMapper();
 
     public GameService() {
         gameList = new ArrayList<>();
@@ -41,8 +44,8 @@ public class GameService {
     }
 
 
-    public int checkWinnerPlayer(Game game, int playerNumber) {
-        int[][] boardField = game.getBoardArray();
+    public int checkWinnerPlayer(Game game, int playerNumber) throws JsonProcessingException {
+        int[][] boardField = objectMapper.readValue(game.getBoardArray(),int[][].class);
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j <= 15 - 5; j++) {
                 if (boardField[i][j] != 0 && boardField[i][j] == playerNumber &&
@@ -97,11 +100,11 @@ public class GameService {
         return 0;
     }
 
-    public String printCurrentBoard(Game game) {
+    public String printCurrentBoard(Game game) throws JsonProcessingException {
         String s = "";
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
-                s = s + game.getBoardArray()[i][j];
+                s = s + objectMapper.readValue(game.getBoardArray(), int[][].class)[i][j];
                 s = s + " ";
             }
             s = s + "\n";

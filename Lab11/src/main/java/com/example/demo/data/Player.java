@@ -1,26 +1,27 @@
 package com.example.demo.data;
 
+import com.example.demo.serializer.SocketSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.net.Socket;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Player {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private int playerNumber;
-    private Socket socket;
+    @JsonSerialize(using = SocketSerializer.class)
+    private String socket;
     private String name;
 
-    public Player(int playerId, Socket socket) {
-        this.id = playerId;
+    public Player(String socket) {
         this.socket = socket;
     }
 
-    public Player(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }

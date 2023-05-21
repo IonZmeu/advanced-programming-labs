@@ -4,11 +4,13 @@ import com.example.demo.controller.GameController;
 import com.example.demo.controller.PlayerController;
 import com.example.demo.controller.ProductController;
 import com.example.demo.data.Player;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.runtime.ObjectMethods;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -19,6 +21,7 @@ public class SimpleServer {
     private final GameController gameController = new GameController();
     private final PlayerController playerController = new PlayerController();
     private final ProductController productController = new ProductController();
+    ObjectMapper objectMapper = new ObjectMapper();
     final Object lockObject = new Object();
 
     public static final int PORT = 8100;
@@ -33,7 +36,7 @@ public class SimpleServer {
                 Socket socket = serverSocket.accept();
                 synchronized (lockObject) {
                     int playerId = readPlayerId(socket.getInputStream());
-                    Player player = new Player(playerId,0,socket,null);
+                    Player player = new Player(playerId,0,objectMapper.writeValueAsString(socket),null);
                     playerController.createPlayer(player);
                     new ClientThread(player, playerController, gameController).start();
                 }

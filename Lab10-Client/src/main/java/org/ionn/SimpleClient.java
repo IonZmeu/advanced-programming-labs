@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.UUID;
 
 public class SimpleClient {
-    public static final String PLAYER_ID = UUID.randomUUID().toString();
+    public static final String PLAYER_ID = UUID.randomUUID();
 
     public static void main(String[] args) throws IOException, InterruptedException {
         String serverAddress = "127.0.0.1"; // The server's IP address

@@ -1,13 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.data.Game;
-import com.example.demo.data.Player;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +17,12 @@ public class GameService {
         gameList = new ArrayList<>();
     }
 
-    public Game getById(int id){
+    public Game getById(int id) {
         return gameList.stream()
                 .filter(p -> p.getId() == id).findFirst().orElse(null);
     }
 
-    public int createNewGameFromObject(Game game){
+    public int createNewGameFromObject(Game game) {
         int id = 1 + gameList.size();
         game.setId(id);
         gameList.add(game);
@@ -43,18 +40,8 @@ public class GameService {
                 "Player updated successsfully", HttpStatus.OK);
     }
 
-    public String printBoard(Game game){
-        String s = "";
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++){
-                s = s + game.getBoardArray()[i][j];
-                s = s + " ";
-            }
-            s = s + "\n";
-        }
-        return s;
-    }
-    public int checkWinnerPlayer (Game game, int playerNumber){
+
+    public int checkWinnerPlayer(Game game, int playerNumber) {
         int[][] boardField = game.getBoardArray();
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j <= 15 - 5; j++) {
@@ -108,5 +95,17 @@ public class GameService {
         }
 
         return 0;
+    }
+
+    public String printCurrentBoard(Game game) {
+        String s = "";
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                s = s + game.getBoardArray()[i][j];
+                s = s + " ";
+            }
+            s = s + "\n";
+        }
+        return s;
     }
 }

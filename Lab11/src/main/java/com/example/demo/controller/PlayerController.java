@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.data.Player;
-import com.example.demo.data.Product;
 import com.example.demo.service.PlayerService;
-import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

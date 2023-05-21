@@ -4,24 +4,22 @@ import com.example.demo.controller.GameController;
 import com.example.demo.controller.PlayerController;
 import com.example.demo.data.Game;
 import com.example.demo.data.Player;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 public class ClientThread extends Thread {
-    PlayerController playerController = new PlayerController();
-    GameController gameController = new GameController();
+    private final PlayerController playerController;
+    private final GameController gameController;
     Game game = new Game();
     private final int playerId;
     private  int gameId;
     private String gameName;
-    private int lastMove = 0;
-    private boolean stopCommand = false;
-
-    public ClientThread(Player player) {
+    public ClientThread(Player player, PlayerController playerController, GameController gameController) {
         this.playerId = player.getId();
+        this.playerController = playerController;
+        this.gameController = gameController;
     }
 
     public void run() {
@@ -101,8 +99,6 @@ public class ClientThread extends Thread {
                     int coordinateY = Integer.parseInt(xy[1]);
                     if (playerController.getPlayer(playerId).getPlayerNumber() == 1){
 
-
-                        //game.getGameBoard().updateBoard(playerController.getPlayer(playerId),coordinateX,coordinateY);
                         int board[][] = game.getBoardArray();
                         board[coordinateX][coordinateY] = playerController.getPlayer(playerId).getPlayerNumber();
                         game.setBoardArray(board);

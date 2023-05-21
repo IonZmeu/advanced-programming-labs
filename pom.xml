@@ -19,6 +19,7 @@
         <module>Lab9</module>
         <module>Lab10-Server</module>
         <module>Lab10-Client</module>
+        <module>Lab11-Client</module>
     </modules>
 
     <properties>

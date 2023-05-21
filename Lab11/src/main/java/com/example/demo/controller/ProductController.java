@@ -2,19 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.data.Product;
 import com.example.demo.service.ProductService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService productService = new ProductService();
 
     @GetMapping
     public List<Product> getProducts() {

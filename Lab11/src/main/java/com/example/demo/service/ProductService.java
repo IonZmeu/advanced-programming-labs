@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class ProductService {
     private final List<Product> products;
 
-    ProductService() {
+    public ProductService() {
         products = new ArrayList<>();
         products.add(new Product(1, "Mask"));
         products.add(new Product(2, "Gloves"));

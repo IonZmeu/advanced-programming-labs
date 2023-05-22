@@ -26,21 +26,19 @@ public class SocketDeserializer extends JsonDeserializer<Socket> {
         String inputStr = node.get("inputStream").asText();
 
 
-        socket.setOutputStream(getOutputStreamFromString(outputStr));
-        socket.setInputStream(getInputStreamFromString(inputStr));
+     //   socket.setOutputStream(getOutputStreamFromString(outputStr));
+     //   socket.setInputStream(getInputStreamFromString(inputStr));
 
         return socket;
     }
 
     private OutputStream getOutputStreamFromString(String str) {
-        // Create your custom logic to convert the string representation to an OutputStream
-        // Here's an example that returns null
+        //
         return null;
     }
 
     private InputStream getInputStreamFromString(String str) {
-        // Create your custom logic to convert the string representation to an InputStream
-        // Here's an example that returns null
+        //
         return null;
     }
 }

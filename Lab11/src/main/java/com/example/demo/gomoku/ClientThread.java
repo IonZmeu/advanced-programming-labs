@@ -86,7 +86,7 @@ public class ClientThread extends Thread {
                         out.println(raspuns);
                         out.flush();
 
-                        PrintWriter out2 = new PrintWriter(objectMapper.readValue(game.getPlayers().get(0).getSocket(), SocketSerializer.class).getOutputStream());
+                        PrintWriter out2 = new PrintWriter(objectMapper.readValue(game.getPlayers().get(0).getSocket(), Socket.class).getOutputStream());
                         out2.println("The game has started, wait for your opponent to submit his move");
                         out2.flush();
                         out2 = new PrintWriter(objectMapper.readValue(game.getPlayers().get(1).getSocket(), Socket.class).getOutputStream());

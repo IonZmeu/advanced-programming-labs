@@ -21,6 +21,7 @@
         <module>Lab10-Client</module>
         <module>Lab11-Client</module>
         <module>Lab12</module>
+        <module>Lab13</module>
     </modules>
 
     <properties>

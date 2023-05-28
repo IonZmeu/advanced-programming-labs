@@ -2,59 +2,44 @@ package org.ionn;
 
 import org.junit.Test;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
-        Person person = new Person();
-        person.setName("Ion");
-        person.setAge(20);
-        System.out.println(getFieldNames(Person.class.getFields()));
-        System.out.println(getFieldNames(person.getClass().getDeclaredFields()));
-        for (Method m : Person.class.getDeclaredMethods()
-             ) {
-            System.out.println(m);
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+        Class<?> loadedClass = Class.forName("org.ionn.Person");
+
+        // Identify the package
+        Package classPackage = loadedClass.getPackage();
+        String packageName = classPackage != null ? classPackage.getName() : "(default package)";
+//        System.out.println(packageName);
+        //Using reflection, extract as many information about the class (at least its methods).
+
+        List<Method> methodList = Arrays.stream(loadedClass.getMethods()).toList();
+//        for (Method method: methodList
+//             ) {
+//            System.out.println(method);
+//        }
+//
+//        List<Field> fieldList = Arrays.stream(loadedClass.getDeclaredFields()).toList();
+//        for (Field field: fieldList
+//             ) {
+//            System.out.println(field);
+//        }
+
+        //Using reflection, invoke the static methods, with no arguments, annotated with @Test.
+
+        for (Method method: methodList
+        ) {
+            if (Modifier.isStatic(method.getModifiers()) && method.isAnnotationPresent(Test.class)) {
+                method.invoke(null);
+            }
         }
 
-        dinamicallyCheckClasses("org.ionn.Person");
-
-
-//        ClassLoader classLoader = Main.class.getClassLoader();
-//        MyClassLoader myClassLoader = new MyClassLoader(classLoader);
-//        Class roadClass = myClassLoader.loadClass("Road");
-//        System.out.println(roadClass.getName());
+        //
     }
 
-    private static void dinamicallyCheckClasses(String className){
-        ClassLoader classLoader = Main.class.getClassLoader();
-        try {
-            Class aClass = classLoader.loadClass(className);
-            System.out.println("aClass.getDeclaredMethods() = " + aClass.getDeclaredMethods()[0]);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenObject_whenGetsFieldNamesAtRuntime_thenCorrect() {
-        Object person = new Person();
-        Field[] fields = person.getClass().getDeclaredFields();
-
-        List<String> actualFieldNames = getFieldNames(fields);
-        assertTrue(Arrays.asList("name", "age")
-                .containsAll(actualFieldNames));
-    }
-
-    private static List<String> getFieldNames(Field[] fields) {
-        List<String> fieldNames = new ArrayList<>();
-        for (Field field : fields)
-            fieldNames.add(field.getName());
-        return fieldNames;
-    }
 }

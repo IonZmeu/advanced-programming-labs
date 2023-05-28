@@ -1,16 +1,17 @@
 package org.ionn;
 
-import lombok.Data;
+import org.junit.Test;
 
 public class Person {
     public String name;
     private int age;
 
-    public void sayA (){
+    @Test
+    public static void sayA (){
         System.out.println("A");
     }
 
-    private void sayB (){
+    private static void sayB (){
         System.out.println("B");
     }
 

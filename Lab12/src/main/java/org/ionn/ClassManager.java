@@ -2,6 +2,7 @@ package org.ionn;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,13 +12,18 @@ import java.util.List;
 
 public class ClassManager {
     private Class<?> loadedClass;
+    private String className;
 
-    public ClassManager(String className) throws ClassNotFoundException {
-        loadedClass = Class.forName(className);
-    }
+    private String absolutePath;
 
-    public ClassManager(Class<?> loadedClass) {
-        this.loadedClass = loadedClass;
+    public ClassManager(MyClassLoader myClassLoader,String filePath) throws ClassNotFoundException {
+        this.absolutePath = filePath;
+        // scoate din filepath classes\org\ionn\Main.class sare peste classes -> org\ionn\Main.class substring scapa de .class ->
+        // org\ionn\Main inlocuieste \ cu . -> org.ionn.Main
+        className = filePath.substring(filePath.indexOf("classes") + 8, filePath.lastIndexOf('.'))
+                .replace(File.separatorChar, '.');
+
+        loadedClass = myClassLoader.loadClass(absolutePath, className);
     }
 
     public String packageName() {
@@ -45,7 +51,7 @@ public class ClassManager {
         List<Method> methodList = Arrays.stream(loadedClass.getMethods()).toList();
         for (Method method : methodList
         ) {
-            if (Modifier.isStatic(method.getModifiers()) && method.isAnnotationPresent(Test.class)) {
+            if (Modifier.isStatic(method.getModifiers()) && method.isAnnotationPresent(Test.class) && method.getParameterCount() == 0) {
                 method.invoke(null);
             }
         }

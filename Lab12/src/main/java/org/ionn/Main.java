@@ -1,27 +1,32 @@
 package org.ionn;
 
-import java.io.File;
+
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.MalformedURLException;
 
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        /*
-        ClassManager classManager = new ClassManager("org.ionn.Person");
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, MalformedURLException {
+        MyClassLoader myClassLoader = new MyClassLoader(MyClassLoader.class.getClassLoader());
+
+        ClassManager classManager = new ClassManager(myClassLoader,"D:\\facultateanul2sem1\\sem2\\advanced-programming-labs\\Lab12\\target\\classes\\org\\ionn\\Person.class");
         // Identify the package
+        System.out.println("///////////////////////////////packageName///////////////////////////////");
         System.out.println(classManager.packageName());
         //Using reflection, extract as many information about the class (at least its methods).
-        classManager.printMethods();
-        classManager.printFields();
+        System.out.println("///////////////////////////////printMethods///////////////////////////////");
+         classManager.printMethods();
+        System.out.println("///////////////////////////////printFields///////////////////////////////");
+         classManager.printFields();
         //Using reflection, invoke the static methods, with no arguments, annotated with @Test.
-        classManager.invokeTestMethodsWithNoArg();
-        */
+        System.out.println("///////////////////////////////invokeTestMethodsWithNoArg///////////////////////////////");
+         classManager.invokeTestMethodsWithNoArg();
 
-        ExploreFolder exploreFolder = new ExploreFolder("D:\\facultateanul2sem1\\sem2\\advanced-programming-labs\\Lab4");
-        exploreFolder.printFieldsOfAllClasses();
+
+        //ExploreFolder exploreFolder = new ExploreFolder(myClassLoader,"D:\\facultateanul2sem1\\sem2\\advanced-programming-labs\\Lab4");
         //exploreFolder.invokeMethodsFromClassesAnnotatedWithTest();
+
+
     }
 
 }

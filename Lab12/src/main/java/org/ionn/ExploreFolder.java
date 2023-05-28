@@ -5,9 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ExploreFolder {
     private static File file;
+    private static MyClassLoader myClassLoader;
 
-    public ExploreFolder(String inputPath) {
+    public ExploreFolder(MyClassLoader myClassLoader,String inputPath) {
         file = new File(inputPath);
+        this.myClassLoader = myClassLoader;
     }
 
     public static void printFieldsOfAllClasses() throws ClassNotFoundException {
@@ -23,9 +25,7 @@ public class ExploreFolder {
                     printFieldsOfAllClasses(file);
                 } else if (file.getName().endsWith(".class")) {
                     String filePath = file.getAbsolutePath();
-                    String className = filePath.substring(filePath.indexOf("classes") + 8, filePath.lastIndexOf('.'))
-                            .replace(File.separatorChar, '.');
-                    ClassManager classManager = new ClassManager(className);
+                    ClassManager classManager = new ClassManager(myClassLoader,filePath);
                     classManager.printFields();
                 }
             }
@@ -46,14 +46,11 @@ public class ExploreFolder {
                     invokeMethodsFromClassesAnnotatedWithTest(file);
                 } else if (file.getName().endsWith(".class")) {
                     String filePath = file.getAbsolutePath();
-                    // scoate din filepath classes\org\ionn\Main.class sare peste classes -> org\ionn\Main.class substring scapa de .class ->
-                    // org\ionn\Main inlocuieste \ cu . -> org.ionn.Main
-                    String className = filePath.substring(filePath.indexOf("classes") + 8, filePath.lastIndexOf('.'))
-                            .replace(File.separatorChar, '.');
-                    ClassManager classManager = new ClassManager(className);
+                    ClassManager classManager = new ClassManager(myClassLoader,filePath);
                     classManager.invokeTestMethodsWithArg();
                 }
             }
         }
     }
+
 }
